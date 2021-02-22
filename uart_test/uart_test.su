@@ -1,0 +1,4 @@
+uart_test.c:52:6:write_uart	48	static
+uart_test.c:92:5:main	16	static
+uart_test.c:101:6:vApplicationMallocFailedHook	16	static
+uart_test.c:120:6:vApplicationStackOverflowHook	16	static
