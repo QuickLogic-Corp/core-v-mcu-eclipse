@@ -1,8 +1,42 @@
 # core-v-mcu2-eclipse
-eclipse project that uses FreeRTOS kernel and runs on core-v-mcu2
+Eclipse project that uses the FreeRTOS kernel and runs on core-v-mcu2
+## Installation
+Eclipse relies on a larger ecosystem of tools.  This project uses a particualr set of tools in a particualr set of locations.  These instructions do not cover loading the other tools, or adapting the preferences to point to differ tools or different locations.  These instructions assume that you are familar enough with Eclispe to make any required changes.
+### Step 1: 
+Install Eclispe (you are on your own for this step)
+
+### Step 2: clone the core-v-mcu2-eclipse repo
+~~~
+git clone git@github.com:QuickLogic-Corp/core-v-mcu2-eclipse.git
+~~~
+### Step 3: run Eclipse, import uart_test and the launch configuration
+~~~
+eclipse
+~~~
+
+- create and launch a new workspace
+![step1](./docs/images/launch-step1.png)
+- select import existing projects 
+![step2](./docs/images/launch-step2.jpg)
+- choose repo as root directory and select uart_test project
+![step3](./docs/images/launch-step3.png)
+- under file menu, import then launch configutations
+![step4](./docs/images/launch-step4.png)
+- select only launchconfig 
+
+![step5](./docs/images/launch-step5.png)
+- under debug pull down, choose 'Debug Configurations ...' 
+
+![step6](./docs/images/launch-step6.png)
+- under GDB OpenOCD Debugging, choose uart_test Default, then click Debug
+
+![step7](./docs/images/launch-step7.png)
+
+This should compile, link and load the application and stop at main waiting for you to start debugging.
+
 ## Emulation hardware
 The intent is to support more than one emulation platform.
-Currently supported boards:
+Currently only one board is supported:
 
 * Nexys A7 100T
 
