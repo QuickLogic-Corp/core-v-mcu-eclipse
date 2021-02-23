@@ -46,6 +46,7 @@
 #include <stdio.h>
 
 /* PULPissimo includes. */
+#include "target/core-v-mcu/include/core-v-mcu-config.h"
 #include "core-v-mcu-system.h"
 #include "hal/include/hal_timer_irq.h"
 #include "hal/include/hal_fll.h"
@@ -98,13 +99,13 @@ static void prvSetupHardware( void );
 #include "include/i2c_task.h"
 void prvCAMTask (void *pvParameters);
 #include <blinky/include/estruct.h>
-apb_timer_typedef *apb_timer;
-apb_interrupt_ctl_typedef *apb_int;
+//apb_timer_typedef *apb_timer;
+//apb_interrupt_ctl_typedef *apb_int;
 
 int main(void)
 {
-	apb_timer = ((apb_timer_typedef*) 0x1A10B000);
-	apb_int = ((apb_interrupt_ctl_typedef*) 0x1A109800);
+	//apb_timer = ((apb_timer_typedef*) TIMER_START_ADDR);
+	//apb_int = ((apb_interrupt_ctl_typedef*) 0x1A109800);
 	prvSetupHardware();
 
 	/* The mainCREATE_SIMPLE_BLINKY_DEMO_ONLY setting is described at the top
