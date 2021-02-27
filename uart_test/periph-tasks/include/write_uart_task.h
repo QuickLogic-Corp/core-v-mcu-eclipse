@@ -27,13 +27,14 @@ typedef struct {
 	volatile uint32_t data;
 } uart_channel_t;
 
-#define PrintQueueLength	(3)
+#define PrintQueueLength	(256)
 typedef struct {
 	uint8_t *str;
 	uint32_t len;
 } print_t;
 
-void vSendString(uint8_t uart_id, uint8_t *pcString, uint32_t len);
+void vUartTxBuf(uint8_t uart_id, uint8_t *pcBuf, uint32_t len);
+void vUartTxChar(uint8_t uart_id, uint8_t ucChar);
 
 void prvWriteUart0Task (void *pvParameters);
 void prvWriteUart1Task (void *pvParameters);

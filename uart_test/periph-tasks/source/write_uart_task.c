@@ -14,13 +14,22 @@
 
 static TaskHandle_t xTasktoNotify[N_UART];
 static QueueHandle_t xPrtQueue[N_UART];  // Print queue
-void vSendString(uint8_t uart_id, uint8_t *pcString, uint32_t len)
+void vUartTxBuf(uint8_t uart_id, uint8_t *pcString, uint32_t len)
 {
 	print_t mymessage;
 	
 	configASSERT(mymessage.str = pvPortMalloc(len));
 	memcpy (mymessage.str, pcString, len);
 	mymessage.len = len;
+	xQueueSend(xPrtQueue[uart_id], &mymessage, portMAX_DELAY);
+}
+
+void vUartTxChar(uint8_t uart_id, uint8_t ucChar)
+{
+	print_t mymessage;
+	
+	mymessage.str = (uint8_t*)ucChar;
+	mymessage.len = 1;
 	xQueueSend(xPrtQueue[uart_id], &mymessage, portMAX_DELAY);
 }
 
@@ -84,12 +93,17 @@ void prvWriteUart0Task (void *pvParameters)
 	xTasktoNotify[0] = xTaskGetCurrentTaskHandle();
 	for (;;) {
 		xQueueReceive(xPrtQueue[0], &str_struct, portMAX_DELAY);
-		uart->tx_saddr = str_struct.str;
+		if (str_struct.len == 1) {
+			uart->tx_saddr = &(str_struct.str);
+		} else {
+			uart->tx_saddr = str_struct.str;
+		}
 		uart->tx_size = str_struct.len;
 		uart->tx_cfg = 0x10; //enable the transfer
         ulTaskNotifyTake(pdTRUE,          /* Clear the  value before exiting. */
                          portMAX_DELAY );
-        vPortFree(str_struct.str);
+        if (str_struct.len != 1)
+        	vPortFree(str_struct.str);
 
 	}
 }
@@ -119,12 +133,17 @@ void prvWriteUart1Task (void *pvParameters)
 	xTasktoNotify[1] = xTaskGetCurrentTaskHandle();
 	for (;;) {
 		xQueueReceive(xPrtQueue[1], &str_struct, portMAX_DELAY);
-		uart->tx_saddr = str_struct.str;
+		if (str_struct.len == 1) {
+			uart->tx_saddr = &(str_struct.str);
+		} else {
+			uart->tx_saddr = str_struct.str;
+		}
 		uart->tx_size = str_struct.len;
 		uart->tx_cfg = 0x10; //enable the transfer
         ulTaskNotifyTake(pdTRUE,          /* Clear the  value before exiting. */
                          portMAX_DELAY );
-        vPortFree(str_struct.str);
+        if (str_struct.len != 1)
+        	vPortFree(str_struct.str);
 
 	}
 }

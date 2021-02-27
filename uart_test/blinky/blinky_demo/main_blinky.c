@@ -212,9 +212,11 @@ static void prvQueueReceiveTask(void *pvParameters)
 			vToggleLED();
 		}
 		sprintf(message,"Blinky[0] %d %d \r\n", ulExpectedValue, ulReceivedValue);
-		vSendString(0, message, strlen(message));
+		vUartTxBuf(0, message, strlen(message));
 		sprintf(message,"Blinky[1] %d %d \r\n", ulExpectedValue+10, ulReceivedValue);
-		vSendString(1, message, strlen(message));
+		//vUartTxBuf(1, message, strlen(message));
+		for (char* pc = message; *pc != '\0'; pc++)
+			vUartTxChar(1, *pc);
 
 		ulReceivedValue = 0U;
 
