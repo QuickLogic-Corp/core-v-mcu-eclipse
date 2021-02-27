@@ -2,8 +2,20 @@
 Eclipse project that uses the FreeRTOS kernel and runs on core-v-mcu2
 ## Installation
 Eclipse relies on a larger ecosystem of tools.  This project uses a particualr set of tools in a particualr set of locations.  These instructions do not cover loading the other tools, or adapting the preferences to point to differ tools or different locations.  These instructions assume that you are familar enough with Eclispe to make any required changes.
-### Step 1: 
+### Step 1a: 
 Install Eclipse (you are on your own for this step)
+
+### Step 1b:
+Install OpenOCD.  Recommend getting it from this location:
+~~~
+https://sourceforge.net/projects/openocd/files/openocd/
+~~~
+I used 0.11.0-rc2.
+Installation is accomplished by:
+~~~
+./configure && make
+sudo make install
+~~~
 
 ### Step 2: clone the core-v-mcu2-eclipse repo
 ~~~
