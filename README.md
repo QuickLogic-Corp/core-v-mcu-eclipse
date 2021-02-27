@@ -3,7 +3,7 @@ Eclipse project that uses the FreeRTOS kernel and runs on core-v-mcu2
 ## Installation
 Eclipse relies on a larger ecosystem of tools.  This project uses a particualr set of tools in a particualr set of locations.  These instructions do not cover loading the other tools, or adapting the preferences to point to differ tools or different locations.  These instructions assume that you are familar enough with Eclispe to make any required changes.
 ### Step 1: 
-Install Eclispe (you are on your own for this step)
+Install Eclipse (you are on your own for this step)
 
 ### Step 2: clone the core-v-mcu2-eclipse repo
 ~~~
@@ -13,7 +13,7 @@ git clone git@github.com:QuickLogic-Corp/core-v-mcu2-eclipse.git
 ~~~
 eclipse
 ~~~
-
+NOTE: importing the uart_test does not imprt the information to launch the debugger, so after importing uart_test, be sure to either import the launch configuration or create you own.
 - create and launch a new workspace
 ![step1](./docs/images/launch-step1.png)
 - select import existing projects 
