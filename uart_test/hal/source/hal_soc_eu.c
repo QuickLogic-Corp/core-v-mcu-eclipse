@@ -18,7 +18,7 @@
 /* Author: Robert Balas (balasr@iis.ee.ethz.ch)
  */
 
-#include <pulp_io.h>
+#include <target/core-v-mcu/include/pulp_io.h>
 #include <stdint.h>
 #include "target/core-v-mcu/include/core-v-mcu-pulp-mem-map.h"
 #include "hal/include/hal_soc_eu.h"

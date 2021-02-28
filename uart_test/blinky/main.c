@@ -47,7 +47,7 @@
 
 /* PULPissimo includes. */
 #include "target/core-v-mcu/include/core-v-mcu-config.h"
-#include "core-v-mcu-system.h"
+#include "target/core-v-mcu/include/core-v-mcu-system.h"
 #include "hal/include/hal_timer_irq.h"
 #include "hal/include/hal_fll.h"
 #include "hal/include/hal_irq.h"

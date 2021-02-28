@@ -19,8 +19,8 @@
 
 /* Driver to control and configure the PULP IRQ (apb_interrupt_control)*/
 
-#include <csr.h>
-#include <pulp_io.h>
+#include <target/core-v-mcu/include/csr.h>
+#include <target/core-v-mcu/include/pulp_io.h>
 #include <stdint.h>
 
 #include "target/core-v-mcu/include/core-v-mcu-pulp-mem-map.h"

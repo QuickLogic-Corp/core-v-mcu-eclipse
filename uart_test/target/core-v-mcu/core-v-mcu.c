@@ -19,7 +19,7 @@
 
 #include <stdint.h>
 #include <assert.h>
-#include <core_pulp_cluster.h>
+#include <target/core-v-mcu/include/core_pulp_cluster.h>
 
 #include <FreeRTOS.h>
 #include "FreeRTOSConfig.h"

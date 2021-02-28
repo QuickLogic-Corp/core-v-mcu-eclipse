@@ -21,8 +21,8 @@
 
 #include <stdint.h>
 #include <assert.h>
-#include <bits.h>
-#include <pulp_io.h>
+#include <target/core-v-mcu/include/bits.h>
+#include <target/core-v-mcu/include/pulp_io.h>
 
 #include "target/core-v-mcu/include/core-v-mcu-pulp-mem-map.h"
 #include "hal/include/hal_pinmux.h"

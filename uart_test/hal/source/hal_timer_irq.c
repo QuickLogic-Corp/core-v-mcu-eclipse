@@ -21,8 +21,8 @@
  *         Germain Haugou (germain.haugou@iis.ee.ethz.ch)
  */
 
-#include <bits.h>
-#include <pulp_io.h>
+#include <target/core-v-mcu/include/bits.h>
+#include <target/core-v-mcu/include/pulp_io.h>
 #include <stdint.h>
 #include <stdbool.h>
 
