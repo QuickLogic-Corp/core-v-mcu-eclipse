@@ -1,11 +1,11 @@
 # core-v-mcu2-eclipse
 Eclipse project that uses the FreeRTOS kernel and runs on core-v-mcu2
 ## Installation
-Eclipse relies on a larger ecosystem of tools.  This project uses a particualr set of tools in a particualr set of locations.  These instructions do not cover loading the other tools, or adapting the preferences to point to differ tools or different locations.  These instructions assume that you are familar enough with Eclispe to make any required changes.
-### Step 1a: 
+Eclipse relies on a larger ecosystem of tools.  This project uses a particualr set of tools in a particualr set of locations.  These instructions do not cover loading the other tools, or adapting the preferences to point to different tools or different locations.  These instructions assume that you are familar enough with Eclispe to make any required changes.
+### Step 1: 
 Install Eclipse (you are on your own for this step)
 
-### Step 1b:
+### Step 2:
 Install OpenOCD.  Recommend getting it from this location:
 ~~~
 https://sourceforge.net/projects/openocd/files/openocd/
@@ -17,34 +17,64 @@ Installation is accomplished by:
 sudo make install
 ~~~
 
-### Step 2: clone the core-v-mcu2-eclipse repo
-~~~
-git clone git@github.com:QuickLogic-Corp/core-v-mcu2-eclipse.git
-~~~
-### Step 3: run Eclipse, import uart_test and the launch configuration
+
+### Step 3: run Eclipse, import projects directly from git (import launch in step 4)
 ~~~
 eclipse
 ~~~
 NOTE: importing the uart_test does not imprt the information to launch the debugger, so after importing uart_test, be sure to either import the launch configuration or create you own.
-- create and launch a new workspace
-![step1](./docs/images/launch-step1.png)
-- select import existing projects 
-![step2](./docs/images/launch-step2.jpg)
-- choose repo as root directory and select uart_test project
-![step3](./docs/images/launch-step3.png)
-- under file menu, import then launch configutations
-![step4](./docs/images/launch-step4.png)
-- select only launchconfig 
+- create and launch a new workspace then select import existing projects
 
-![step5](./docs/images/launch-step5.png)
-- under debug pull down, choose 'Debug Configurations ...' 
+![step1](./docs/images/ImportFromGit-1.png)
+- select clone URL
 
-![step6](./docs/images/launch-step6.png)
-- under GDB OpenOCD Debugging, choose uart_test Default, then click Debug
+![step2](./docs/images/ImportFromGit-2-CloneURL.png)
+- paste repo name
 
-![step7](./docs/images/launch-step7.png)
+![step3](./docs/images/ImportFromGit-3-URL.png)
+
+- specify folder to put files in (default is git/reponame)
+
+![step4](./docs/images/ImportFromGit-4-LocalDest.png)
+
+- select the branch to use
+
+![step5](./docs/images/ImportFromGit-5-Branch.png)
+
+- select the import wizard (default works fine)
+
+![step6](./docs/images/ImportFromGit-6-ImportWizard.png)
+
+- tell it to actually import form the repo
+
+![step7](./docs/images/ImportFromGit-7-Import.png)
+
+- this is what it looks like when the import has finished
+
+![step9](./docs/images/ImportFromGit-8-ImportDone.png)
+
+# Step 4: Import launch configuration
+This step pulls in the launch configurations which are configured to use hs2 and OpenOCD.
+If you hardware setup is different, you can either ignore this step and create your own, or use this step and modify to fit your configuration.
+
+- select import launch configurations
+
+![step4.1](./docs/images/ImportLaunch-1.png)
+
+- specify the directory where the files were imported (default is git/reponame)
+
+![step4.2](./docs/images/ImportLaunch-2-Directory.png)
+
+- select which launch configurations to import
+
+![step4.3](./docs/images/ImportLaunch-3-Configs.png)
+
+- under debug>Debug configurations ... choose GDB OpenOCD>config a click Debug
+
+![step4.1](./docs/images/ImportLaunch-4-Debug.png)
 
 This should compile, link and load the application and stop at main waiting for you to start debugging.
+
 
 ## Emulation hardware
 The intent is to support more than one emulation platform.
