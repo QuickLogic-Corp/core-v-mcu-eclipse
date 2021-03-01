@@ -33,8 +33,11 @@ typedef struct {
 	uint32_t len;
 } print_t;
 
-void vUartTxBuf(uint8_t uart_id, uint8_t *pcBuf, uint32_t len);
-void vUartTxChar(uint8_t uart_id, uint8_t ucChar);
+void 	vUartTxBuf(uint8_t uart_id, char *pcBuf, uint32_t len);
+void 	vUartTxChar(uint8_t uart_id, char c);
+
+uint8_t ucUartCharAvailable(uint8_t uart_id);
+int		xUartRxChar(uint8_t uart_id);
 
 void prvWriteUart0Task (void *pvParameters);
 void prvWriteUart1Task (void *pvParameters);

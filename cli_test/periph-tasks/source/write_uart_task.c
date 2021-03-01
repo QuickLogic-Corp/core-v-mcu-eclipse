@@ -14,21 +14,25 @@
 
 static TaskHandle_t xTasktoNotify[N_UART];
 static QueueHandle_t xPrtQueue[N_UART];  // Print queue
-void vUartTxBuf(uint8_t uart_id, uint8_t *pcString, uint32_t len)
+void vUartTxBuf(uint8_t uart_id, char *pcString, uint32_t len)
 {
 	print_t mymessage;
 	
-	configASSERT(mymessage.str = pvPortMalloc(len));
-	memcpy (mymessage.str, pcString, len);
-	mymessage.len = len;
-	xQueueSend(xPrtQueue[uart_id], &mymessage, portMAX_DELAY);
+	if (len == 1) {
+		vUartTxChar(uart_id, *pcString);
+	} else {
+		configASSERT(mymessage.str = pvPortMalloc(len));
+		memcpy (mymessage.str, pcString, len);
+		mymessage.len = len;
+		xQueueSend(xPrtQueue[uart_id], &mymessage, portMAX_DELAY);
+	}
 }
 
-void vUartTxChar(uint8_t uart_id, uint8_t ucChar)
+void vUartTxChar(uint8_t uart_id, char c)
 {
 	print_t mymessage;
 	
-	mymessage.str = (uint8_t*)ucChar;
+	mymessage.str = (uint8_t*)c;
 	mymessage.len = 1;
 	xQueueSend(xPrtQueue[uart_id], &mymessage, portMAX_DELAY);
 }
@@ -48,6 +52,17 @@ uint32_t getline(uart_channel_t *uart, uint8_t *str, uint32_t len) {
 	}
 	return ret--;
 }
+
+uint8_t ucUartCharAvailable(uint8_t uart_id) { // TODO: make uart_id meaningful
+	uart_channel_t* puartchan = (uart_channel_t*)UDMA_CH_ADDR_UART0;
+	return puartchan->valid;
+}
+
+int	xUartRxChar(uint8_t uart_id) { // TODO: make uart_id meaningful
+	uart_channel_t* puartchan = (uart_channel_t*)UDMA_CH_ADDR_UART0;
+	return (int)(puartchan->data & 0xff);
+}
+
 
 
 static void ISR_uart0_handler() {

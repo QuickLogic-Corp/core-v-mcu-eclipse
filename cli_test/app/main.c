@@ -80,7 +80,6 @@ or 0 to run the more comprehensive test and demo application. */
  */
 
 	extern void main_blinky( void );
-/* fred */
 
 /* Prototypes for the standard FreeRTOS callback/hook functions implemented
 within this file.  See https://www.freertos.org/a00016.html */
@@ -89,7 +88,7 @@ void vApplicationIdleHook( void );
 void vApplicationStackOverflowHook( TaskHandle_t pxTask, char *pcTaskName );
 void vApplicationTickHook( void );
 
-/* Prepare haredware to run the demo. */
+/* Prepare hardware to run the demo. */
 static void prvSetupHardware( void );
 
 
@@ -97,10 +96,12 @@ static void prvSetupHardware( void );
 /*-----------------------------------------------------------*/
 #include <periph-tasks/include/write_uart_task.h>
 #include <app/include/i2c_task.h>
-void prvCAMTask (void *pvParameters);
 #include <app/include/estruct.h>
-//apb_timer_typedef *apb_timer;
-//apb_interrupt_ctl_typedef *apb_int;
+
+#include "libs/cli/include/cli.h"
+
+char* SOFTWARE_VERSION_STR = "cli_test v0.1\n";
+extern const struct cli_cmd_entry my_main_menu[];
 
 int main(void)
 {
@@ -121,10 +122,18 @@ int main(void)
 	//xTaskCreate (prvI2CTask, "I2C", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+1, NULL);
 	//xTaskCreate (prvCAMTask, "CAM", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL);
 
-	{
-		main_blinky();
-	}
+	CLI_start_task( my_main_menu );
 
+	/* Start the tasks and timer running. */
+	vTaskStartScheduler();
+	/* If all is well, the scheduler will now be running, and the following
+		line will never be reached.  If the following line does execute, then
+		there was insufficient FreeRTOS heap memory available for the Idle and/or
+		timer tasks to be created.  See the memory management section on the
+		FreeRTOS web site for more details on the FreeRTOS heap
+		http://www.freertos.org/a00111.html. */
+
+	while(1);
 }
 /*-----------------------------------------------------------*/
 

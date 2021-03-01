@@ -58,12 +58,13 @@
 #define configCLINT_BASE_ADDRESS 0
 #define configMTIME_BASE_ADDRESS (0x1A10b008)
 #define configMTIMECMP_BASE_ADDRESS (0x1A10b010)
-#define configUSE_PREEMPTION	 1
-#define configUSE_IDLE_HOOK	 0
-#define configUSE_TICK_HOOK	 0
-#define configCPU_CLOCK_HZ	 DEFAULT_SYSTEM_CLOCK
-#define configTICK_RATE_HZ	 ((TickType_t)1000)
-#define configMAX_PRIORITIES	 (5)
+#define configUSE_PREEMPTION		1
+#define configUSE_TICKLESS_IDLE		1
+#define configUSE_IDLE_HOOK	 		0
+#define configUSE_TICK_HOOK	 		0
+#define configCPU_CLOCK_HZ	 		DEFAULT_SYSTEM_CLOCK
+#define configTICK_RATE_HZ	 		((TickType_t)1000)
+#define configMAX_PRIORITIES	 	(5)
 /* Can be as low as 60 but some of the demo tasks that use this constant require it to be higher. */
 #define configMINIMAL_STACK_SIZE ((unsigned short)800)
 /* we want to put the heap into special section */
