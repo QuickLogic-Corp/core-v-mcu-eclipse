@@ -53,13 +53,13 @@ uint32_t getline(uart_channel_t *uart, uint8_t *str, uint32_t len) {
 	return ret--;
 }
 
-uint8_t ucUartCharAvailable(uint8_t uart_id) { // TODO: make uart_id meaningful
-	uart_channel_t* puartchan = (uart_channel_t*)UDMA_CH_ADDR_UART0;
+uint8_t ucUartCharAvailable(uint8_t uart_id) {
+	uart_channel_t* puartchan = (uart_channel_t*)(UDMA_CH_ADDR_UART + (uart_id * UDMA_CH_SIZE));
 	return puartchan->valid;
 }
 
-int	xUartRxChar(uint8_t uart_id) { // TODO: make uart_id meaningful
-	uart_channel_t* puartchan = (uart_channel_t*)UDMA_CH_ADDR_UART0;
+int	xUartRxChar(uint8_t uart_id) {
+	uart_channel_t* puartchan = (uart_channel_t*)(UDMA_CH_ADDR_UART + (uart_id * UDMA_CH_SIZE));
 	return (int)(puartchan->data & 0xff);
 }
 

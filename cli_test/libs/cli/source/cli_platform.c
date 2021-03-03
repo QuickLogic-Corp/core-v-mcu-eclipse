@@ -94,37 +94,23 @@ void CLI_putc_raw(int c)
 int CLI_getkey_raw( int timeout )
 {
   intptr_t tstart;
+  int x;
   
   tstart = CLI_timeout_start();
   for(;;){
     //uart_rx_wait( UART_ID_CONSOLE, timeout );
     if( ucUartCharAvailable( UART_ID_CONSOLE ) ){
-      return xUartRxChar( UART_ID_CONSOLE  );
+      x = xUartRxChar( UART_ID_CONSOLE  );
+      if (x != 0)							// FIXME: why do we get nullls?
+    	  return x;
     }
     /* no key */
     if( CLI_timeout_expired(tstart, timeout ) ){
       break;
     }
-    //vTaskDelay( 10 );
+    vTaskDelay( 10 );
   }
   return EOF;
-}
-
-static jmp_buf buf;
-
-void b()
-{
-	dbg_str("in function b\n");
-    longjmp(buf, 1);
-}
-
-void a()
-{
-	dbg_str("in function a\n");
-    if (setjmp(buf))
-    	dbg_str("back in function a\n");
-    else
-        b();
 }
 
 void CLI_task( void *pParameter )
@@ -134,7 +120,7 @@ void CLI_task( void *pParameter )
 
     //wait_ffe_fpga_load();
     /* set to 1 to have a timestamp on the side */
-    //vTaskDelay(100);
+    vTaskDelay(100);
     
     CLI_common.timestamps = 0;
 

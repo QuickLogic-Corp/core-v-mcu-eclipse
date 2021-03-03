@@ -32,21 +32,35 @@
 //#include "qlsh_commands.h"
 
 // Sub menus
-const struct cli_cmd_entry uart1[];
+const struct cli_cmd_entry uart1_tests[];
+const struct cli_cmd_entry mem_tests[];
 
 // UART functions
 static void uart1_tx(const struct cli_cmd_entry *pEntry);
 
+// MEM functions
+static void mem_print_start(const struct cli_cmd_entry *pEntry);
+static void mem_check(const struct cli_cmd_entry *pEntry);
+
 // Main menu
 const struct cli_cmd_entry my_main_menu[] = {
-    CLI_CMD_SUBMENU( "uart1", uart1, "commands for uart1" ),
+    CLI_CMD_SUBMENU( "uart1", uart1_tests, "commands for uart1" ),
+	CLI_CMD_SUBMENU( "mem", mem_tests, "commands for memory" ),
     CLI_CMD_TERMINATE()
 };
 
 // UART1 menu
-const struct cli_cmd_entry uart1[] =
+const struct cli_cmd_entry uart1_tests[] =
 {
 	CLI_CMD_SIMPLE( "tx", uart1_tx, "<string>: write <string> to uart1" ),
+    CLI_CMD_TERMINATE()
+};
+
+// mem menu
+const struct cli_cmd_entry mem_tests[] =
+{
+	CLI_CMD_SIMPLE( "start", 	mem_print_start, 	"print start of unused memory" ),
+	CLI_CMD_SIMPLE( "check", 	mem_check, 			"print start of unused memory" ),
     CLI_CMD_TERMINATE()
 };
 
@@ -64,10 +78,47 @@ static void uart1_tx(const struct cli_cmd_entry *pEntry)
     	vUartTxBuf(1, pzArg, strlen(pzArg));
     }
     vUartTxBuf(1, "\r\n", 2);
+    dbg_str("<<DONE>>");
     return;
 }
 
+// MEM functions
+static void mem_print_start(const struct cli_cmd_entry *pEntry)
+{
+    (void)pEntry;
+    // Add functionality here
+    extern char __l2_shared_end;
+    dbg_str_hex32("l2_shared_end", (uint32_t)(&__l2_shared_end));
+    dbg_str("<<DONE>>");
+}
 
+static void mem_check(const struct cli_cmd_entry *pEntry)
+{
+    (void)pEntry;
+    // Add functionality here
+    bool	fPassed = true;
+    extern char __l2_shared_end;
+    uint32_t*	pl;
+    for (pl = (uint32_t*)(&__l2_shared_end); (uint32_t)pl < 0x1c080000; pl++) {
+    	*pl = (uint32_t)pl;
+    }
+
+    // pl=0x1c070000; *pl = 76;	// Enable to force and error
+
+    for (pl = (uint32_t*)(&__l2_shared_end); (uint32_t)pl < 0x1c080000; pl++) {
+		if (*pl != (uint32_t)pl) {
+			dbg_str_hex32("mem check fail at", (uint32_t)pl);
+			dbg_str_hex32("read back        ", *pl);
+			fPassed = false;
+			break;
+		}
+	}
+    if (fPassed) {
+    	dbg_str("<<PASSED>>");
+    } else {
+    	dbg_str("<<FAILED>>");
+    }
+}
 
 
 

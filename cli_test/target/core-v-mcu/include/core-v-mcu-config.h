@@ -23,6 +23,7 @@
 #define UDMA_START_ADDR 0x1A102000
 // peripheral channel definitions
 #define UDMA_CH_ADDR_CTRL       (0x1A102000)
+#define UDMA_CH_SIZE			(0x80)
 #define UDMA_CH_ADDR_UART       (0x1A102000 + 1 * 0x80)
 #define UDMA_CH_ADDR_UART0      (0x1A102000 + 1 * 0x80)
 #define UDMA_CH_ADDR_UART1      (0x1A102000 + 2 * 0x80)
