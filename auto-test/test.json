@@ -1,0 +1,13 @@
+{
+	"initialize" : [
+		{">console"		: "exit <<DONE>>\r\n"}
+	],
+	"uart1" : [
+		{">console"		: "uart1 tx hello\r\n"},
+		{"<uart1"			: "hello\r\n"}
+	],
+	"mem"	: [
+		{">console"		: "mem start\r\n"},
+		{">console"		: "mem check\r\n"}
+	]
+}
