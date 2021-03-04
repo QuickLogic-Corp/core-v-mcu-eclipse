@@ -52,7 +52,7 @@
 #include "hal/include/hal_fll.h"
 #include "hal/include/hal_irq.h"
 #include "hal/include/hal_gpio.h"
-#include "perpih-tasks/include/write_uart_task.h"
+#include "periph-tasks/include/write_uart_task.h"
 
 /******************************************************************************
  * This project provides two demo applications.  A simple blinky style project,
