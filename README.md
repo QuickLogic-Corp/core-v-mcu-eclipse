@@ -3,7 +3,12 @@ Eclipse project that uses the FreeRTOS kernel and runs on core-v-mcu2
 ## Installation
 Eclipse relies on a larger ecosystem of tools.  This project uses a particualr set of tools in a particualr set of locations.  These instructions do not cover loading the other tools, or adapting the preferences to point to different tools or different locations.  These instructions assume that you are familar enough with Eclispe to make any required changes.
 ### Step 1: 
-Install Eclipse (you are on your own for this step)
+Install Eclipse IDE for Embedded C/C++ Developers.  Recommend getting it from this location.
+~~~
+https://www.eclipse.org/downloads/packages/
+~~~
+Look for this section:
+![embedded](./docs/images/eclipse-for-embedded.png)
 
 ### Step 2:
 Install OpenOCD.  Recommend getting it from this location:
