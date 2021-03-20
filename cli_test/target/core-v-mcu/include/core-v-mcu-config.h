@@ -2,6 +2,8 @@
 #define N_IO                 48
 #define N_SYSIO              3
 #define N_GPIO               32
+#define NBIT_PADCFG          6
+#define NBIT_PADMUX          2
 #define N_UART               2
 #define N_QSPIM              1
 #define N_I2CM               2
