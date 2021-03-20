@@ -23,7 +23,6 @@
 #define UDMA_START_ADDR 0x1A102000
 // peripheral channel definitions
 #define UDMA_CH_ADDR_CTRL       (0x1A102000)
-#define UDMA_CH_SIZE			(0x80)
 #define UDMA_CH_ADDR_UART       (0x1A102000 + 1 * 0x80)
 #define UDMA_CH_ADDR_UART0      (0x1A102000 + 1 * 0x80)
 #define UDMA_CH_ADDR_UART1      (0x1A102000 + 2 * 0x80)
@@ -69,3 +68,15 @@
 #define UDMA_CTRL_FILTER0_CLKEN    (1 << 6)
 #define UDMA_CTRL_FPGA0_CLKEN      (1 << 7)
 #define UDMA_CTRL_EXT_PER0_CLKEN   (1 << 8)
+
+// FLL configuration information
+#define FLL_START_ADDR 0x1A100000
+
+// Timer configuration information
+#define SOC_CTRL_START_ADDR 0x1A104000
+
+// Timer configuration information
+#define EU_START_ADDR 0x1A109000
+
+// Timer configuration information
+#define TIMER_START_ADDR 0x1A10B000
