@@ -88,9 +88,9 @@ void prvWriteUart0Task (void *pvParameters)
 {
 	uart_channel_t*	uart;
 	print_t 				str_struct;
-	UDMA_CTRL_t*		pudma_ctrl;
-	
+	UDMA_CTRL_t*		pudma_ctrl = UDMA_CH_ADDR_CTRL;
 	volatile uint32_t *udma_cg = (uint32_t*)UDMA_CH_ADDR_CTRL;
+	
 	xPrtQueue[0] = xQueueCreate(PrintQueueLength, sizeof(print_t));
 	configASSERT(xPrtQueue[0]);
     /* Set handlers. */
@@ -100,8 +100,8 @@ void prvWriteUart0Task (void *pvParameters)
     hal_soc_eu_set_fc_mask(SOC_EVENT_UDMA_UART_RX(0));
     hal_soc_eu_set_fc_mask(SOC_EVENT_UDMA_UART_TX(0));
 
-	//*udma_cg |= UDMA_CTRL_UART0_CLKEN;  // turn on uart clock ?;
-	pudma_ctrl->REG_CG = UDMA_CTRL_UART0_CLKEN;
+	*udma_cg |= UDMA_CTRL_UART0_CLKEN;  // turn on uart clock ?;
+	//pudma_ctrl->REG_CG = UDMA_CTRL_UART0_CLKEN;
 	uart = (uart_channel_t*)UDMA_CH_ADDR_UART0;
 	uart->setup = (5000000/115200) << 16 | // Baud rate divisor
 			(3 << 1) | // 8-bits
@@ -130,8 +130,9 @@ void prvWriteUart1Task (void *pvParameters)
 {
 	uart_channel_t *uart;
 	print_t str_struct;
-
+	UDMA_CTRL_t*		pudma_ctrl = UDMA_CH_ADDR_CTRL;
 	volatile uint32_t *udma_cg = (uint32_t*)UDMA_CH_ADDR_CTRL;
+	
 	xPrtQueue[1] = xQueueCreate(PrintQueueLength, sizeof(print_t));
 	configASSERT(xPrtQueue[1]);
     /* Set handlers. */
@@ -141,7 +142,8 @@ void prvWriteUart1Task (void *pvParameters)
     hal_soc_eu_set_fc_mask(SOC_EVENT_UDMA_UART_RX(1));
     hal_soc_eu_set_fc_mask(SOC_EVENT_UDMA_UART_TX(1));
 
-	*udma_cg |= UDMA_CTRL_UART1_CLKEN;  // turn on uart clock ?;
+	//*udma_cg |= UDMA_CTRL_UART1_CLKEN;  // turn on uart clock ?;
+	pudma_ctrl->REG_CG = UDMA_CTRL_UART1_CLKEN;
 	uart = (uart_channel_t*)UDMA_CH_ADDR_UART1;
 	uart->setup = (5000000/115200) << 16 | // Baud rate divisor
 			(3 << 1) | // 8-bits
