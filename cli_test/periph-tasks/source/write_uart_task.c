@@ -100,8 +100,7 @@ void prvWriteUart0Task (void *pvParameters)
     hal_soc_eu_set_fc_mask(SOC_EVENT_UDMA_UART_RX(0));
     hal_soc_eu_set_fc_mask(SOC_EVENT_UDMA_UART_TX(0));
 
-	*udma_cg |= UDMA_CTRL_UART0_CLKEN;  // turn on uart clock ?;
-	//pudma_ctrl->REG_CG = UDMA_CTRL_UART0_CLKEN;
+	pudma_ctrl->REG_CG |= UDMA_CTRL_UART0_CLKEN;
 	uart = (uart_channel_t*)UDMA_CH_ADDR_UART0;
 	uart->setup = (5000000/115200) << 16 | // Baud rate divisor
 			(3 << 1) | // 8-bits
@@ -143,7 +142,6 @@ void prvWriteUart1Task (void *pvParameters)
     hal_soc_eu_set_fc_mask(SOC_EVENT_UDMA_UART_RX(1));
     hal_soc_eu_set_fc_mask(SOC_EVENT_UDMA_UART_TX(1));
 
-	//*udma_cg |= UDMA_CTRL_UART1_CLKEN;  // turn on uart clock ?;
     pudma_ctrl->REG_CG |= UDMA_CTRL_UART1_CLKEN;
 
 
