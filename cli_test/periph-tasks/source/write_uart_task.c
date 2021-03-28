@@ -86,10 +86,9 @@ static void ISR_uart1_handler() {
 
 void prvWriteUart0Task (void *pvParameters)
 {
-	uart_channel_t *uart;
-	print_t str_struct;
-
-	typedef UDMA_CTRL_t*	pudma_ctrl;
+	uart_channel_t*	uart;
+	print_t 				str_struct;
+	UDMA_CTRL_t*		pudma_ctrl;
 	
 	volatile uint32_t *udma_cg = (uint32_t*)UDMA_CH_ADDR_CTRL;
 	xPrtQueue[0] = xQueueCreate(PrintQueueLength, sizeof(print_t));

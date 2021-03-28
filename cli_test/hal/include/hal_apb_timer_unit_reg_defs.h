@@ -166,6 +166,6 @@ static inline uint32_t regfield_read(uint32_t reg, uint32_t mask, uint32_t lsb) 
 }
 static inline uint32_t regfield_write(uint32_t reg, uint32_t mask, uint32_t lsb, uint32_t value) {
   reg &= ~(mask << lsb);
-  reg | = (value & mask) << lsb;
+  reg |= (value & mask) << lsb;
   return reg;
 }
