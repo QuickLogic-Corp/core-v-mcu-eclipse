@@ -21,7 +21,7 @@
 #include <target/core-v-mcu/include/pulp_io.h>
 #include <stdint.h>
 #include "target/core-v-mcu/include/core-v-mcu-config.h"
-#include "target/core-v-mcu/include/core-v-mcu-memory-map.h.h" //ToDo: this should be merged into config.h
+#include "target/core-v-mcu/include/core-v-mcu-memory-map.h" //ToDo: this should be merged into config.h
 #include "hal/include/hal_soc_eu.h"
 
 void soc_eu_mask_set(uint32_t offset, uint32_t mask)
