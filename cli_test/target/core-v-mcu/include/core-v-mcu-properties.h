@@ -71,23 +71,23 @@
 
 /* TODO: fix this table */
 /* UDMA peripherals */
-#define UDMA_HAS_SPIM               (1)
-#define UDMA_HAS_HYPER              (0)
-#define UDMA_HAS_UART               (1)
-#define UDMA_HAS_I2C                (1)
-#define UDMA_HAS_DMACPY             (0)
-#define UDMA_HAS_I2S                (1)
-#define UDMA_HAS_CPI                (1)
+// #define UDMA_HAS_SPIM               (1)
+// #define UDMA_HAS_HYPER              (0)
+// #define UDMA_HAS_UART               (1)
+// #define UDMA_HAS_I2C                (1)
+// #define UDMA_HAS_DMACPY             (0)
+// #define UDMA_HAS_I2S                (1)
+// #define UDMA_HAS_CPI                (1)
 
 /* TODO: fix this table */
 /* Number of UDMA peripherals */
-#define UDMA_NB_SPIM                (2)
-#define UDMA_NB_HYPER               (0)
-#define UDMA_NB_UART                (1)
-#define UDMA_NB_I2C                 (2)
-#define UDMA_NB_DMACPY              (0)
-#define UDMA_NB_I2S                 (1)
-#define UDMA_NB_CPI                 (1)
+// #define UDMA_NB_SPIM                (2)
+// #define UDMA_NB_HYPER               (0)
+// #define UDMA_NB_UART                (1)
+// #define UDMA_NB_I2C                 (2)
+// #define UDMA_NB_DMACPY              (0)
+// #define UDMA_NB_I2S                 (1)
+// #define UDMA_NB_CPI                 (1)
 
 /* TODO: fix this table */
 /* #define UDMA_NB_PERIPH              ((UDMA_HAS_SPIM ? UDMA_NB_SPIM) + \ */
@@ -115,8 +115,8 @@
 
 
 /* Pads & GPIO. */
-#define ARCHI_NB_PAD                (48)
-#define ARCHI_NB_GPIO               (32)
+// #define ARCHI_NB_PAD                (48)
+// #define ARCHI_NB_GPIO               (32)
 
 /* PWM. */
 /* #define ARCHI_NB_PWM                (4) */
