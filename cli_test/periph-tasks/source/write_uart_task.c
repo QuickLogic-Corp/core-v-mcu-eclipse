@@ -11,6 +11,7 @@
 #include <periph-tasks/include/write_uart_task.h>
 #include <string.h>
 #include "hal/include/hal_fc_event.h"
+#include "hal/include/hal_udma_ctrl_reg_defs.h"
 
 static TaskHandle_t xTasktoNotify[N_UART];
 static QueueHandle_t xPrtQueue[N_UART];  // Print queue
@@ -88,6 +89,8 @@ void prvWriteUart0Task (void *pvParameters)
 	uart_channel_t *uart;
 	print_t str_struct;
 
+	typedef UDMA_CTRL_t*	pudma_ctrl;
+	
 	volatile uint32_t *udma_cg = (uint32_t*)UDMA_CH_ADDR_CTRL;
 	xPrtQueue[0] = xQueueCreate(PrintQueueLength, sizeof(print_t));
 	configASSERT(xPrtQueue[0]);
@@ -98,7 +101,8 @@ void prvWriteUart0Task (void *pvParameters)
     hal_soc_eu_set_fc_mask(SOC_EVENT_UDMA_UART_RX(0));
     hal_soc_eu_set_fc_mask(SOC_EVENT_UDMA_UART_TX(0));
 
-	*udma_cg |= UDMA_CTRL_UART0_CLKEN;  // turn on uart clock ?;
+	//*udma_cg |= UDMA_CTRL_UART0_CLKEN;  // turn on uart clock ?;
+	pudma_ctrl->REG_CG = UDMA_CTRL_UART0_CLKEN;
 	uart = (uart_channel_t*)UDMA_CH_ADDR_UART0;
 	uart->setup = (5000000/115200) << 16 | // Baud rate divisor
 			(3 << 1) | // 8-bits
